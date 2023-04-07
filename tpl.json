@@ -1,5 +1,6 @@
 {
   "web": "https://gitlab.com/yu786228428/tpl-all/-/archive/web/tpl-all-web.zip",
-  "mini": "",
+  "mini-taro": "https://gitlab.com/yu786228428/tpl-all/-/archive/mini-taro/tpl-all-mini-taro.zip",
+  "mini-uni": "https://gitlab.com/yu786228428/tpl-all/-/archive/mini-uni/tpl-all-mini-uni.zip",
   "node": "https://gitlab.com/yu786228428/tpl-all/-/archive/node/tpl-all-node.zip"
 }
