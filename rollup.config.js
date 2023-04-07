@@ -12,10 +12,10 @@ import json from '@rollup/plugin-json'
  */
 const config = {
   input: './index.ts',
-  // external: [/template/],
   output: {
     file: './dist/index.js',
-    format: 'es'
+    format: 'es',
+    banner: '#!/usr/bin/env node'
   },
   plugins: [
     json(),

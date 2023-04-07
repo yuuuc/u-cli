@@ -8,8 +8,7 @@
     "u-cli": "./dist/index.js"
   },
   "scripts": {
-    "build": "rollup --bundleConfigAsCjs -c",
-    "dev": "nodemon -e ts --exec ts-node ./index"
+    "build": "rollup --bundleConfigAsCjs -c"
   },
   "repository": {
     "type": "git",
