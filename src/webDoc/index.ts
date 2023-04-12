@@ -118,6 +118,7 @@ const createScript = (list: string[], component_dir: string): string => {
  */
 const startViteWeb = async () => {
   await execa(`npx vite --config ./${config.root}/vite.config.ts`, undefined, {
-    stdio: 'inherit'
+    stdout: 'inherit',
+    stderr: 'ignore'
   })
 }

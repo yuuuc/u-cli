@@ -12,7 +12,5 @@ export default () => {
     .option('-t, --test', 'test document')
     .action((dir, options) => {
       init(dir)
-
-      // const
     })
 }
