@@ -1,6 +1,6 @@
 {
-  "name": "u-cli",
-  "version": "1.0.0",
+  "name": "u-tpl-tools",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -19,6 +19,7 @@
   },
   "author": "",
   "license": "ISC",
+  "files": ["dist"],
   "bugs": {
     "url": "https://github.com/yuuuc/u-cli/issues"
   },
