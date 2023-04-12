@@ -39,6 +39,7 @@
     "inquirer": "^9.1.5",
     "ora": "^6.3.0",
     "request": "^2.88.2",
+    "rimraf": "^5.0.0",
     "rollup": "^3.20.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-terser": "^7.0.2",

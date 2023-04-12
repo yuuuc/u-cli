@@ -5,7 +5,7 @@ import ora from 'ora'
 import chalk from 'chalk'
 
 import { ConfigValue, tplTypeList } from '../types'
-import { createTpl, createComponent } from '../template/index'
+import { createTpl, createComponent } from '../create/index'
 
 type createType = {
   component: boolean
