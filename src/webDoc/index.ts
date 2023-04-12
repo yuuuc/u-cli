@@ -3,7 +3,6 @@ import { template } from './config/template'
 import fs from 'fs'
 import path from 'path'
 import ora from 'ora'
-import chalk from 'chalk'
 import { execa } from 'execa'
 import { platform } from 'os'
 import { rimrafSync } from 'rimraf'
@@ -32,7 +31,7 @@ export const init = (dir: string) => {
     //   console.log(chalk.redBright(`${config.root} is not a dir!`))
     // }
   }
-  const load = ora(chalk.greenBright('init web doc...')).start()
+  const load = ora('init web doc...').start()
   createBaseEnv(component_list, component_test_dir)
   load.stop()
   startViteWeb()
@@ -78,7 +77,11 @@ const createScript = (list: string[], component_dir: string): string => {
     `
   }
 
-  // 生成头部导入
+  /**
+   * 生成头部导入
+   * @param name @type { string }
+   * @returns
+   */
   const createImportRow = (name: string): string => {
     const c = `./${name}/test.vue`
     let p: string
@@ -89,7 +92,6 @@ const createScript = (list: string[], component_dir: string): string => {
       // mac 兼容
       p = path.resolve(component_dir, c)
     }
-
     return `import ${name} from "${p}"\n`
   }
 

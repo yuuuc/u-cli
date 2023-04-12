@@ -4,7 +4,7 @@ const TPL_VUE = `<template></template>\n
 \n
 <script setup lang="ts"></script>\n
 \n
-<style></style>`
+<style scoped></style>`
 
 export const createComponent = (name: string): Promise<void> => {
   return new Promise((resolve, reject) => {

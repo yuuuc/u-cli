@@ -73,7 +73,7 @@ const createPendingHandle = (p: Promise<void>) => {
 
 const checkExist = (name: string) => {
   if (fs.existsSync(name)) {
-    console.log(chalk.bgRed('\n filename is created!'))
-    throw new Error(`${name} Dir is exist!`)
+    console.log(chalk.redBright('\n filename is created!'))
+    // throw new Error(`${name} Dir is exist!`)
   }
 }
