@@ -1,4 +1,4 @@
-import { config } from './config/index'
+import { DefaultConfig } from '../common/index'
 import { template } from './config/template'
 import fs from 'fs'
 import path from 'path'
@@ -12,8 +12,23 @@ import { rimrafSync } from 'rimraf'
  * @param name 文件名
  * @returns
  */
-const pathResolve = (name?: string) =>
-  path.resolve(process.cwd(), config.root + (name ? `/${name}` : ''))
+const pathResolve = (name?: string) => {
+  const webDoc = webDocDefaultConfig()
+  return path.resolve(process.cwd(), webDoc.root + (name ? `/${name}` : ''))
+}
+
+/**
+ * webDoc 配置
+ * @returns
+ */
+const webDocDefaultConfig = () => {
+  const { root, scanDir, scanName } = DefaultConfig.webDoc
+  return {
+    root,
+    scanDir,
+    scanName
+  }
+}
 
 /**
  * 目录初始化
@@ -45,6 +60,7 @@ export const init = (dir: string) => {
  *        |- router.ts ?
  */
 const createBaseEnv = (l: string[], component_dir: string) => {
+  const webDoc = webDocDefaultConfig()
   fs.mkdirSync(pathResolve())
   fs.writeFileSync(pathResolve('index.html'), template.html)
   fs.writeFileSync(pathResolve('main.ts'), template.mian_ts)
@@ -54,7 +70,7 @@ const createBaseEnv = (l: string[], component_dir: string) => {
   )
   fs.writeFileSync(
     pathResolve('vite.config.ts'),
-    template.vite_config(config.root)
+    template.vite_config(webDoc.root)
   )
 }
 
@@ -119,7 +135,8 @@ const createScript = (list: string[], component_dir: string): string => {
  * 启动 ViteWeb
  */
 const startViteWeb = async () => {
-  await execa(`npx vite --config ./${config.root}/vite.config.ts`, undefined, {
+  const webDoc = webDocDefaultConfig()
+  await execa(`npx vite --config ./${webDoc.root}/vite.config.ts`, undefined, {
     stdout: 'inherit',
     stderr: 'ignore'
   })

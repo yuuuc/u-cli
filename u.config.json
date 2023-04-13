@@ -1,0 +1,10 @@
+{
+  "create": {
+    "component": "components"
+  },
+  "webDoc": {
+    "root": "webTest",
+    "scanDir": "components",
+    "scanName": "test"
+  }
+}

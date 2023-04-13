@@ -7,13 +7,17 @@ import path from 'path'
 describe('create', () => {
   test('create component', () => {
     const fileName = 'aaa'
-    createComponent(fileName)
-    expect(fs.existsSync(fileName)).toEqual(true)
-    expect(fs.existsSync(path.resolve(fileName, 'index.vue'))).toEqual(true)
-    expect(fs.existsSync(path.resolve(fileName, 'test.vue'))).toEqual(true)
-
-    rimrafSync(fileName)
+    const scanDir = 'components'
+    const cDir = scanDir + '/' + fileName
+    fs.mkdirSync(scanDir)
+    createComponent(fileName, scanDir)
+    expect(fs.existsSync(cDir)).toEqual(true)
+    expect(fs.existsSync(path.resolve(cDir, 'index.vue'))).toEqual(true)
+    expect(fs.existsSync(path.resolve(cDir, 'test.vue'))).toEqual(true)
+    rimrafSync(scanDir)
   })
+
+  // test('create ')
 
   test('create template', async () => {
     const fileName = 'bbb'

@@ -6,6 +6,7 @@ import chalk from 'chalk'
 
 import { ConfigValue, tplTypeList } from '../types'
 import { createTpl, createComponent } from '../create/index'
+import { DefaultConfig, customConfig } from '../common/index'
 
 type createType = {
   component: boolean
@@ -20,6 +21,9 @@ type createType = {
  * create -p [name] 创建项目模板
  */
 export default () => {
+  const createConfig = global.uCustomConfig
+    ? global.uCustomConfig.create
+    : DefaultConfig.create
   program
     .command('create') // <name>
     .description('new-template')
@@ -29,7 +33,7 @@ export default () => {
     .action((name, options: createType) => {
       if (options.component) {
         checkExist(name)
-        createPendingHandle(createComponent(name))
+        createPendingHandle(createComponent(name, createConfig.component))
       }
       if (options.project || Object.keys(options).length === 0) {
         inquirer
