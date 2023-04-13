@@ -3,7 +3,7 @@ import create_command from './src/command/create'
 import doc_command from './src/command/webDoc'
 // import { customConfig } from './src/common'
 
-// program.version('1.0.0')
+program.version('1.0.0')
 create_command()
 doc_command()
 
