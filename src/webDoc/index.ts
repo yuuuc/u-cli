@@ -30,10 +30,12 @@ const webDocDefaultConfig = () => {
   }
 }
 
+type webDocConfig = typeof DefaultConfig.webDoc
+
 /**
  * 目录初始化
  */
-export const init = (dir: string) => {
+export const init = (dir: string, webDoc: webDocConfig) => {
   const component_test_dir = path.resolve(process.cwd(), dir)
   const component_list = fs.readdirSync(component_test_dir)
   // 判断文件是否存在
@@ -47,7 +49,7 @@ export const init = (dir: string) => {
     // }
   }
   const load = ora('init web doc...').start()
-  createBaseEnv(component_list, component_test_dir)
+  createBaseEnv(component_list, webDoc)
   load.stop()
   startViteWeb()
 }
@@ -59,14 +61,13 @@ export const init = (dir: string) => {
  *        |- App.ts
  *        |- router.ts ?
  */
-const createBaseEnv = (l: string[], component_dir: string) => {
-  const webDoc = webDocDefaultConfig()
+const createBaseEnv = (l: string[], webDoc: webDocConfig) => {
   fs.mkdirSync(pathResolve())
   fs.writeFileSync(pathResolve('index.html'), template.html)
   fs.writeFileSync(pathResolve('main.ts'), template.mian_ts)
   fs.writeFileSync(
     pathResolve('App.vue'),
-    template.app_vue(createScript(l, component_dir))
+    template.app_vue(createScript(l, webDoc))
   )
   fs.writeFileSync(
     pathResolve('vite.config.ts'),
@@ -78,7 +79,7 @@ const createBaseEnv = (l: string[], component_dir: string) => {
  * 生成 App 中的 script 内容
  * @param list @type { string[] }
  */
-const createScript = (list: string[], component_dir: string): string => {
+const createScript = (list: string[], webDoc: webDocConfig): string => {
   // 生成响应式数据
   const createMenuRef = (): string => {
     let components_obj_str = ''
@@ -99,14 +100,14 @@ const createScript = (list: string[], component_dir: string): string => {
    * @returns
    */
   const createImportRow = (name: string): string => {
-    const c = `./${name}/test.vue`
+    const c = `./${name}/${webDoc.scanName}.vue`
     let p: string
     // windows
     if (/^win/.test(platform())) {
-      p = path.posix.join(...path.resolve(component_dir, c).split(path.sep))
+      p = path.posix.join(...path.resolve(webDoc.scanDir, c).split(path.sep))
     } else {
       // mac 兼容
-      p = path.resolve(component_dir, c)
+      p = path.resolve(webDoc.scanDir, c)
     }
     return `import ${name} from "${p}"\n`
   }
