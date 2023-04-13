@@ -19,7 +19,9 @@
   },
   "author": "",
   "license": "ISC",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bugs": {
     "url": "https://github.com/yuuuc/u-cli/issues"
   },

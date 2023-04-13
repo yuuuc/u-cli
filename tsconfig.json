@@ -16,6 +16,5 @@
     "declarationDir": "./types/index", // 定义文件输出目录
     "lib": ["esnext", "dom"], // 导入库类型定义
     "types": ["node"] // 导入指定类型包
-  },
-  "exclude": ["template"]
+  }
 }

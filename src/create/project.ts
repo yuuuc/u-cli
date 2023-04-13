@@ -3,7 +3,6 @@ import fs from 'fs'
 import compressing from 'compressing'
 import { ConfigValue } from '../types'
 import tplData from '../../tpl.json'
-import chalk from 'chalk'
 
 const tplOpt: {
   [key in ConfigValue['type']]: string
@@ -31,11 +30,6 @@ export const createTpl = ({ type, name }: ConfigValue): Promise<void> => {
 }
 
 export const modifyProjectPackageInfo = (fileName: string) => {
-  // if (!fs.existsSync(fileName))
-  //   throw new Error(`\n ${fileName} Directory does not exist`)
-  if (!fs.statSync(fileName).isDirectory())
-    return console.log(chalk.redBright(`\n ${fileName} is not d directory`))
-  // throw `\n ${fileName} is not d directory`
   const packageJsonPath = fileName + '/package.json'
   const packageJson = fs.readFileSync(packageJsonPath).toString('utf-8')
   const tempJson = JSON.parse(packageJson)
@@ -53,7 +47,7 @@ export const uncompressFileRename = (
       .uncompress(tempFile, './')
       .then((res) => {
         fs.renameSync(oldName, newName)
-        resolve(undefined)
+        resolve()
       })
       .catch((e) => {
         reject(e)
